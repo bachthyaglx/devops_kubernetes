@@ -1,0 +1,8 @@
+/example*
+hello.sh
+volumes/*
+*.html
+scaling-exercise/*
+node-dev-env/*
+docker-compose.yml
+*.conf

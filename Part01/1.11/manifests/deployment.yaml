@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-output
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-output
+  template:
+    metadata:
+      labels:
+        app: log-output
+    spec:
+      volumes:
+        - name: shared-image
+          persistentVolumeClaim:
+            claimName: image-claim
+      containers:
+        - name: log-writer
+          image: bachthyaglx/log-writer:v1
+          volumeMounts:
+            - name: shared-image
+              mountPath: /usr/src/app/data
+      
+        - name: log-output
+          image: bachthyaglx/pingpong:v1  
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: shared-image
+              mountPath: /usr/src/app/data

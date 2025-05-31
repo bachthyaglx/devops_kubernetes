@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pingpong-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pingpong
+  template:
+    metadata:
+      labels:
+        app: pingpong
+    spec:
+      containers:
+        - name: pingpong
+          image: bachthyaglx/pingpong:v0.1
+          ports:
+            - containerPort: 3000 # Ensure the containerPort matches the targetPort in the service
+          env:
+            - name: PORT
+              value: "3000" # Ensure the PORT matches the app`s listening port
