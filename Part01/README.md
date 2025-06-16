@@ -2,20 +2,24 @@
 ```bash
 k3d cluster create -a 2 (create a server node with 2 agent nodes, default name: k3s-default)
 ```
+
 * Access services exposed via Ingress (like Traefik) using http://localhost:8081
 ```bash
 k3d cluster create k3s-default --api-port 6550 -p "8081:80@loadbalancer"
 ```
+
 * Prepare Dockerfile, build and push image to Docker hub
 ```bash
 docker build -t <image>:<tag> .
 docker push <image>:<tag>
 # if error: docker tag <image>:<tag> yourusername/<image>:<tag>
 ```
+
 * Import image to k3d:
 ```bash
 k3d image import <image>:<tag> -c k3s-default
 ```
+
 * Prepare deployment.yml, create deployment
 ```bash
 kubectl create deployment <deployment_name> --image=<image>:<tag>
@@ -31,7 +35,6 @@ kubectl delete -f manifests/deployment.yaml
 # or edit deployment.yaml so that the tag is updated to the <new_tag> and run
 kubectl apply -f manifests/deployment.yaml
 kubectl rollout restart deployment pingpong-app
-
 ```
 
 * Check materials created
@@ -44,6 +47,7 @@ kubectl describe pod <pod>
 kubectl describe deployment <image>:<tag>
 kubectl get svc,ing
 ```
+
 * Delete deployment
 ```bash
 kubectl delete deployment <image>:<tag>

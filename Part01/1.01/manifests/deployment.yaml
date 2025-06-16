@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hashgenerator-dep # Name of the deployment
+  name: log-output-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hashgenerator
+      app: log-output
   template:
     metadata:
       labels:
-        app: hashgenerator
+        app: log-output
     spec:
       containers:
-        - name: hashgenerator
-          image: hashgenerator:v1 # Image to be used for the container
+        - name: log-output
+          image: log-output:local
