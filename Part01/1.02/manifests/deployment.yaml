@@ -1,22 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-app # Name of the deployment
+  name: todo-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: todo-app
+      app: todo
   template:
     metadata:
       labels:
-        app: todo-app
+        app: todo
     spec:
       containers:
-        - name: todo-app
-          image: todo-app:v0.1
-          imagePullPolicy: IfNotPresent # tells Kubernetes to use the imported image instead of pulling from Docker Hub
+        - name: todo-server
+          image: todo-server:local
           env:
             - name: PORT
               value: "3000"
-

@@ -19,10 +19,15 @@
 
 ## Solution
 
-- Application was built in Rust. Source code can be found [here](https://github.com/VikSil/DevOps_with_Kubernetes/tree/trunk/Part1/Exercise_1.02/app).
-- Image was pushed to Docker Hub repo [viksil/todo_app:1.02](https://hub.docker.com/repository/docker/viksil/todo_app/tags?name=1.02).
-- The following commands were used to create and test Kubernetes deployment:
+The following commands were used to create and test Kubernetes deployment:
 
-![Deployment for Exercise 1.02](https://raw.githubusercontent.com/VikSil/DevOps_with_Kubernetes/refs/heads/trunk/Part1/Exercise_1.02/Exercise_1.02_deployment.png)
+```bash
+k3d cluster create -a 2 # create k3s-default cluster
+docker build -t todo-server:local . # create docker image
+k3d image import todo-server:local -c k3s-default # import image to cluster k3s-default
+kubectl apply -f manifests/deployment.yaml # apply/deploy app to kube cluster k3s-default
+```
 
-![Landing Page for Exercise 1.02](https://raw.githubusercontent.com/VikSil/DevOps_with_Kubernetes/refs/heads/trunk/Part1/Exercise_1.02/Exercise_1.02_landing_page.png)
+Deployment for Exercise 1.02
+
+![alt text](image.png)

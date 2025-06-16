@@ -1,6 +1,7 @@
 * Create a cluster (if not yet)
 ```bash
 k3d cluster create -a 2 (create a server node with 2 agent nodes, default name: k3s-default)
+k3d cluster list
 ```
 
 * Access services exposed via Ingress (like Traefik) using http://localhost:8081
@@ -40,7 +41,6 @@ kubectl rollout restart deployment pingpong-app
 * Check materials created
 ```bash
 kubectl cluster-info
-k3d cluster list (find k3d cluster)
 kubectl get pods (find pods in the cluster)
 kubectl logs -f <pod> (find logs of app running in the pod)
 kubectl describe pod <pod>
@@ -50,6 +50,7 @@ kubectl get svc,ing
 
 * Delete deployment
 ```bash
+kubectl get deployments
 kubectl delete deployment <image>:<tag>
 ```
 
