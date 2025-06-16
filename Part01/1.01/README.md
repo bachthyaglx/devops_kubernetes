@@ -14,7 +14,7 @@
 
 ## Solution
 
-- The following commands were used to create and test Kubernetes deployment:
+The following commands were used to create and test Kubernetes deployment:
 ```bash
 k3d cluster create -a 2 # create a server node with 2 agent nodes, default name: k3s-default
 k3d image import log-output:local -c k3s-default #  Import image into your k3d cluster
