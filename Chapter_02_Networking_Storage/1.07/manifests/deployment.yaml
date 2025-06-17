@@ -15,8 +15,3 @@ spec:
       containers:
         - name: todo-app
           image: todo-app:v0.1
-          # imagePullPolicy: IfNotPresent # tells Kubernetes to use the imported image instead of pulling from Docker Hub
-          env:
-            - name: PORT
-              value: "3000"
-

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-app
+  name: todo-app # Name of the deployment
 spec:
   replicas: 1
   selector:
@@ -14,9 +14,4 @@ spec:
     spec:
       containers:
         - name: todo-app
-          image: bachthyaglx/todo-app:v0.1
-          ports:
-            - containerPort: 3000
-          env:
-            - name: PORT
-              value: "3000"
+          image: todo-app:v0.1

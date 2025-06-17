@@ -2,10 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: todo-app-ingress
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
-  ingressClassName: traefik
   rules:
     - http:
         paths:
@@ -13,6 +10,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: todo-app-svc
+                name: todo-app-service
                 port:
-                  number: 2346
+                  number: 3012

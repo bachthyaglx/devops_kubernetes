@@ -15,4 +15,4 @@ spec:
               service:
                 name: log-output-svc # Name of the service to route traffic to
                 port:
-                  number: 2345
+                  number: 3000
