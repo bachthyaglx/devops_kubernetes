@@ -12,19 +12,17 @@ spec:
       labels:
         app: log-output
     spec:
-      volumes:
+      volumes: # Define volume
         - name: shared-logs
           emptyDir: {}
       containers:
         - name: log-writer
-          image: yourdockerhub/log-writer:v1
-          volumeMounts:
+          image: bachthyaglx/log-writer:v1
+          volumeMounts: # Mount volume
             - name: shared-logs
               mountPath: /usr/src/app/data
         - name: log-reader
-          image: yourdockerhub/log-reader:v1
-          ports:
-            - containerPort: 3000
-          volumeMounts:
+          image: bachthyaglx/log-reader:v1
+          volumeMounts: # Mount volume
             - name: shared-logs
               mountPath: /usr/src/app/data
