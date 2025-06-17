@@ -56,8 +56,8 @@ kubectl rollout restart deployment pingpong-app
 ```bash
 kubectl cluster-info
 kubectl get deployments
-kubectl get pods (find pods in the cluster)
-kubectl logs -f <pod> (find logs of app running in the pod)
+kubectl get pods #find pods in the cluster
+kubectl logs -f <pod> #find logs of app running in the pod#
 kubectl describe pod <pod>
 kubectl describe deployment <image>:<tag>
 kubectl get svc,ing

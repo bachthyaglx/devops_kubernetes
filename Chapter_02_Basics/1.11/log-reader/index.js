@@ -2,28 +2,19 @@ const express = require('express');
 const fs = require('fs');
 const app = express();
 
-const timestampPath = '/usr/src/app/data/timestamp.txt';
-const countPath = '/usr/src/app/data/count.txt';
-
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3033;
 
 app.get('/log', (req, res) => {
-  let count = 0;
-
-  // Load and increase counter
-  if (fs.existsSync(countPath)) {
-    count = parseInt(fs.readFileSync(countPath, 'utf8')) || 0;
+  const filePath = '/usr/src/app/data/log.txt';
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).send('Log file not found');
   }
-  count += 1;
-  fs.writeFileSync(countPath, count.toString());
 
-  // Write new timestamp
-  const timestamp = new Date().toISOString();
-  fs.writeFileSync(timestampPath, timestamp);
-
-  res.send(`${timestamp}\nPing / Pongs: ${count}`);
+  const content = fs.readFileSync(filePath, 'utf-8');
+  res.setHeader('Content-Type', 'text/plain');
+  res.send(content);
 });
 
 app.listen(PORT, () => {
-  console.log(`Reader listening on port ${PORT}`);
+  console.log(`Reader running on port ${PORT}`);
 });

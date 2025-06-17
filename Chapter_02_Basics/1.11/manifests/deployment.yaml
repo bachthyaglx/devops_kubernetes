@@ -13,20 +13,28 @@ spec:
         app: log-output
     spec:
       volumes:
-        - name: shared-image
+        - name: shared-logs
           persistentVolumeClaim:
-            claimName: image-claim
+            claimName: shared-pvc
       containers:
         - name: log-writer
           image: bachthyaglx/log-writer:v1
           volumeMounts:
-            - name: shared-image
+            - name: shared-logs
               mountPath: /usr/src/app/data
-      
-        - name: log-output
-          image: bachthyaglx/pingpong:v1  
-          ports:
-            - containerPort: 3000
+        - name: log-reader
+          image: bachthyaglx/log-reader:v1
           volumeMounts:
-            - name: shared-image
+            - name: shared-logs
               mountPath: /usr/src/app/data
+          env:
+            - name: PORT
+              value: "3033"
+        - name: pingpong
+          image: bachthyaglx/pingpong:v1
+          volumeMounts:
+            - name: shared-logs
+              mountPath: /usr/src/app/data
+          env:
+            - name: PORT
+              value: "3034"

@@ -9,6 +9,13 @@ spec:
   rules:
     - http:
         paths:
+          - path: / # serve HTML + todos
+            pathType: Prefix
+            backend:
+              service:
+                name: image-cache-svc
+                port:
+                  number: 80
           - path: /image
             pathType: Prefix
             backend:

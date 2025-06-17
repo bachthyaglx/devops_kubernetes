@@ -6,7 +6,7 @@ const LOG_PATH = '/usr/src/app/data/output.log';
 
 const PORT = 3033;
 
-app.get('/', (req, res) => {
+app.get('/log', (req, res) => {
   if (fs.existsSync(LOG_PATH)) {
     const data = fs.readFileSync(LOG_PATH, 'utf8');
     res.send(`<pre>${data}</pre>`);
