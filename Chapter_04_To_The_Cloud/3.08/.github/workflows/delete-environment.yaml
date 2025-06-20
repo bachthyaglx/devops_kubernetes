@@ -1,0 +1,45 @@
+# Deleting a branch deletes the environment
+name: Delete environment on branch delete
+
+on:
+  delete:
+    branches:
+      - "**"
+
+jobs:
+  delete-environment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Extract branch name
+        run: |
+          echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+
+      - name: Set namespace
+        run: |
+          if [[ "$BRANCH_NAME" == "main" ]]; then
+            echo "Skipping deletion of 'project' namespace"
+            exit 0
+          fi
+          echo "NAMESPACE=$BRANCH_NAME" >> $GITHUB_ENV
+
+      - name: Authenticate to GKE
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: "${{ secrets.GKE_SA_KEY }}"
+
+      - name: Get GKE credentials
+        uses: google-github-actions/get-gke-credentials@v1
+        with:
+          cluster_name: dwk-cluster
+          location: europe-west1-b
+          project_id: ${{ secrets.GKE_PROJECT }}
+
+      - name: Delete namespace if exists
+        run: |
+          if kubectl get namespace $NAMESPACE > /dev/null 2>&1; then
+            echo "Deleting namespace: $NAMESPACE"
+            kubectl delete namespace $NAMESPACE
+          else
+            echo "Namespace $NAMESPACE does not exist. Nothing to delete."
+          fi

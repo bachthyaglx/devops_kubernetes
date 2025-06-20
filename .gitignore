@@ -1,0 +1,13 @@
+manifests/*
+todo_app/*
+pingpong/*
+volumes/*
+log_output*/*
+*.txt
+zzz/*
+todo_backend/*
+pinglog/*
+secret.yaml
+todo_postgres/*
+
+node_modules

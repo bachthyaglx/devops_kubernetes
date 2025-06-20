@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: todo-postgres
+  namespace: project
+spec:
+  serviceName: todo-postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-postgres
+  template:
+    metadata:
+      labels:
+        app: todo-postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16
+      env:
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: todo-db-config
+              key: POSTGRES_DB
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: todo-db-secret
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: todo-db-secret
+              key: POSTGRES_PASSWORD
+  volumeClaimTemplates:
+    - metadata:
+        name: todo-postgres-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: standard # ✅ GKE's default class
+        resources:
+          requests:
+            storage: 100Mi

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-output
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-output
+  template:
+    metadata:
+      labels:
+        app: log-output
+    spec:
+      volumes:
+        - name: shared-logs
+          persistentVolumeClaim:
+            claimName: shared-pvc
+      containers:
+        - name: log-writer
+          image: bachthyaglx/log-writer:v1
+          volumeMounts:
+            - name: shared-logs
+              mountPath: /usr/src/app/data
+        - name: log-reader
+          image: bachthyaglx/log-reader:v1
+          volumeMounts:
+            - name: shared-logs
+              mountPath: /usr/src/app/data
+          env:
+            - name: PORT
+              value: "3033"
+        - name: pingpong
+          image: bachthyaglx/pingpong:v1
+          volumeMounts:
+            - name: shared-logs
+              mountPath: /usr/src/app/data
+          env:
+            - name: PORT
+              value: "3034"

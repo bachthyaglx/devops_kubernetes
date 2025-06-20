@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-cache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: image-cache
+  template:
+    metadata:
+      labels:
+        app: image-cache
+    spec:
+      volumes:
+        - name: shared-image
+          persistentVolumeClaim:
+            claimName: image-claim
+      containers:
+        - name: image-cache-container
+          image: bachthyaglx/image-cache:latest
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: shared-image
+              mountPath: /usr/src/app/data
