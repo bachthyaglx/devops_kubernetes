@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-output
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-output
+  template:
+    metadata:
+      labels:
+        app: log-output
+    spec:
+      containers:
+        - name: log-output
+          image: bachthyaglx/log-output:latest
+          volumeMounts:
+            - name: output-vol
+              mountPath: /output
+          ports:
+            - containerPort: 8080
+      volumes:
+        - name: output-vol
+          configMap:
+            name: log-output-file
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: log-output-svc
+spec:
+  selector:
+    app: log-output
+  ports:
+    - port: 80
+      targetPort: 8080
