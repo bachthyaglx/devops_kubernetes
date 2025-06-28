@@ -2,7 +2,7 @@
 
 This repo was created while taking "Devops with Kubernetes" course, that is provided [online](https://devopswithkubernetes.com/) by the University of Helsinki. This is 2024 version of the course. The repo contains code and images of solutions to the exercises presented in the course.
 
-## Chapter 2 - Kubernetes Basis
+# Chapter 2 - Kubernetes Basis
 
 ### First Deploy
 - [Exercise 1.01: Getting started](https://github.com/bachthyaglx/devops_kubernetes/tree/main/1.1)
@@ -23,7 +23,7 @@ This repo was created while taking "Devops with Kubernetes" course, that is prov
 - [Exercise 1.12: The project, step 6](https://github.com/bachthyaglx/devops_kubernetes/tree/main/1.12)
 - [Exercise 1.13: The project, step 7](https://github.com/bachthyaglx/devops_kubernetes/tree/main/1.13)
 
-## Chapter 3 - More building blocks
+# Chapter 3 - More building blocks
 
 ### Networking between pods
 - [Exercise 2.1: Connecting pods](https://github.com/bachthyaglx/devops_kubernetes/tree/main/2.1)
@@ -45,7 +45,7 @@ This repo was created while taking "Devops with Kubernetes" course, that is prov
 ### Monitoring
 - [Exercise 2.10: The project, step 13](https://github.com/bachthyaglx/devops_kubernetes/tree/main/2.10)
 
-## Chapter 4 - To the cloud
+# Chapter 4 - To the cloud
 
 ### 9. Introduction to Google Kubernetes Engine
 - [Exercise 3.01: Pingpong GKE](https://github.com/bachthyaglx/devops_kubernetes/tree/main/3.1)
@@ -65,7 +65,7 @@ This repo was created while taking "Devops with Kubernetes" course, that is prov
 - [Exercise 3.11: The project, step 19](https://github.com/bachthyaglx/devops_kubernetes/tree/main/3.11)
 - [Exercise 3.12: The project, step 20](https://github.com/bachthyaglx/devops_kubernetes/tree/main/3.12)
 
-## Chapter 5 - GitOps and friends
+# Chapter 5 - GitOps and friends
 
 ### Update Strategies and Prometheus
 - [Exercise 4.1. Readines probe](https://github.com/bachthyaglx/devops_kubernetes/tree/main/4.1)
@@ -81,7 +81,7 @@ This repo was created while taking "Devops with Kubernetes" course, that is prov
 4.9. The project, step 25
 4.10. The project, the grande finale
 
-## Chapter 6 - Under the hood
+# Chapter 6 - Under the hood
 
 ### Custom Resource Definitions
 - [Exercise 5.1: Readines probe](https://github.com/bachthyaglx/devops_kubernetes/tree/main/5.1)
