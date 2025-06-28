@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wikipedia
+spec:
+  volumes:
+    - name: www
+      emptyDir: {}
+  initContainers:
+    - name: fetch-kubernetes
+      image: curlimages/curl
+      command:
+        - sh
+        - -c
+        - |
+          echo "⏳ Fetching Kubernetes Wikipedia page..."
+          curl -L https://en.wikipedia.org/wiki/Kubernetes -o /www/index.html
+      volumeMounts:
+        - name: www
+          mountPath: /www
+  containers:
+    - name: nginx
+      image: nginx
+      ports:
+        - containerPort: 80
+      volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html
+    - name: fetch-random
+      image: curlimages/curl
+      command:
+        - sh
+        - -c
+        - |
+          echo "⏳ Waiting random time, then fetching a random Wikipedia page..."
+          sleep 5; curl -L https://en.wikipedia.org/wiki/Special:Random -o /www/random.html
+      volumeMounts:
+        - name: www
+          mountPath: /www
