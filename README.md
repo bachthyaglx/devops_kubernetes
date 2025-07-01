@@ -73,13 +73,13 @@ This repo was created while taking "Devops with Kubernetes" course, that is prov
 - [Exercise 4.3: Prometheus](https://github.com/bachthyaglx/devops_kubernetes/tree/main/4.3)
 - [Exercise 4.4: Your canary](https://github.com/bachthyaglx/devops_kubernetes/tree/main/4.4)
 - [Exercise 4.5: The project, step 22](https://github.com/bachthyaglx/devops_kubernetes/tree/main/4.5)
-4.6. The project, step 23
+- [Exercise 4.6: The project, step 23](https://github.com/bachthyaglx/devops_kubernetes/tree/main/4.6)
 
 ### GitOps
-4.7. Baby steps to GitOps
-4.8. The project, step 24
-4.9. The project, step 25
-4.10. The project, the grande finale
+- [Exercise 4.7: Baby steps to GitOps](https://github.com/bachthyaglx/devops_kubernetes/tree/main/4.7)
+- [Exercise 4.8: The project, step 24](https://github.com/bachthyaglx/devops_kubernetes/tree/main/4.8)
+- [Exercise 4.9: The project, step 25](https://github.com/bachthyaglx/devops_kubernetes/tree/main/4.9)
+- [Exercise 4.10: The project, the grande finale](https://github.com/bachthyaglx/devops_kubernetes/tree/main/4.10)
 
 # Chapter 6 - Under the hood
 

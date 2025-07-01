@@ -12,7 +12,7 @@ kubectl port-forward pod/log-output-5ff475cb9b-khhlk 3000:3000
 kubectl port-forward svc/argocd-server -n argocd 8081:443
 ```
 
-## Setup and commands
+## Results
 
 ![alt text](image.png)
 
