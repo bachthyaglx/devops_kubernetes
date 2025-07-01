@@ -5,16 +5,17 @@ name: Build and deploy Log Output
 on:
   push:
     paths:
-      - "**.js"
-      - "**/Dockerfile"
-      - "**/kustomization.yaml"
+      - "log-output/**.js"
+      - "log-output/Dockerfile"
+      - "manifests/kustomization.yaml"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
@@ -22,19 +23,21 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push image
+      - name: Build and push Docker image
         run: |
-          docker build -t your-dockerhub-username/log-output:${{ github.sha }} .
-          docker push your-dockerhub-username/log-output:${{ github.sha }}
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/log-output:${{ github.sha }} ./log-output
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/log-output:${{ github.sha }}
 
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2
 
-      - name: Set image tag
-        run: kustomize edit set image PROJECT/IMAGE=your-dockerhub-username/log-output:${{ github.sha }}
+      - name: Set image tag in kustomization.yaml
+        run: |
+          cd manifests
+          kustomize edit set image ${{ secrets.DOCKERHUB_USERNAME }}/log-output=${{ secrets.DOCKERHUB_USERNAME }}/log-output:${{ github.sha }}
 
-      - name: Commit new image tag
+      - name: Commit updated kustomization.yaml
         uses: EndBug/add-and-commit@v9
         with:
-          add: "kustomization.yaml"
+          add: "manifests/kustomization.yaml"
           message: "Update image to ${{ github.sha }}"
